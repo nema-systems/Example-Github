@@ -1,4 +1,7 @@
 def compute_powertrain_efficiency() -> float:
+    """
+    Compute the efficiency of the powertrain.
+    """
 
     # @nema:get:https://app.nemasystems.io/dev/default/motor-example/data/1
     motor_efficiency = 0.9
