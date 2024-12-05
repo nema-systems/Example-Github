@@ -14,11 +14,11 @@ class ControlParameters:
 
 CONTROL_PARAMETERS = ControlParameters(
     # @nema:get:https://app.nemasystems.io/nema-demo/default/differential-drive-example/data/2
-    Kp=1.0,
+    Kp=3.,
     # @nema:get:https://app.nemasystems.io/nema-demo/default/differential-drive-example/data/5
-    Ki=0.0,
+    Ki=0.25,
     # @nema:get:https://app.nemasystems.io/nema-demo/default/differential-drive-example/data/3
-    Kd=0.0,
+    Kd=0.5,
 )
 
 
