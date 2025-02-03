@@ -5,9 +5,10 @@
 
 // ------------------------------------------------------------
 // Hardcoded battery capacity for this particular vehicle (in kWh).
+// This is automatically updated from Nema, in case this value changes.
 // ------------------------------------------------------------
 // @nema:get:https://app.nemasystems.io/nema-public-demo/default/demo-ev-performance/data/7
-static constexpr double VEHICLE_BATTERY_CAPACITY_KWH = 85;
+static constexpr double VEHICLE_BATTERY_CAPACITY_KWH = 80.0;
 
 // ------------------------------------------------------------
 // Constructor
