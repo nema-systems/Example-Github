@@ -1,6 +1,7 @@
 #include "RangeEstimator.h"
 #include <algorithm>    // for std::accumulate, std::max, std::min
 #include <numeric>      // for std::accumulate
+#include <iostream>     // for std::cerr
 
 // ------------------------------------------------------------
 // Hardcoded battery capacity for this particular vehicle (in kWh).
@@ -33,8 +34,10 @@ void RangeEstimator::setStateOfCharge(double newSoC) {
 // Add new driving data to the rolling window
 // ------------------------------------------------------------
 void RangeEstimator::addDrivingData(double distanceKm, double energyUsedKWh) {
-    if (distanceKm <= 0.0) {
-        // Invalid data; ignore
+    if (distanceKm <= 0.0 || energyUsedKWh < 0.0) {
+        // Invalid data; log and ignore
+        std::cerr << "Invalid driving data: distanceKm = " << distanceKm 
+                  << ", energyUsedKWh = " << energyUsedKWh << std::endl;
         return;
     }
     double consumptionKWhPerKm = energyUsedKWh / distanceKm;
@@ -56,10 +59,7 @@ double RangeEstimator::getEstimatedRangeKm() const {
     }
 
     // Calculate the rolling average consumption (kWh/km)
-    double sum = 0.0;
-    for (double c : m_consumptionHistory) {
-        sum += c;
-    }
+    double sum = std::accumulate(m_consumptionHistory.begin(), m_consumptionHistory.end(), 0.0);
     double avgConsumptionKWhPerKm = sum / m_consumptionHistory.size();
 
     // Sanity check; avoid division by zero or negative consumption
